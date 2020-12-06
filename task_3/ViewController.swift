@@ -44,16 +44,16 @@ class ViewController: UIViewController {
 
         
         //MARK: Slider
-        redSlider.value = 1
-        redSlider.minimumValue = 1
+        redSlider.value = 0
+        redSlider.minimumValue = 0
         redSlider.maximumValue = 255
         
-        greenSlider.value = 1
-        greenSlider.minimumValue = 1
+        greenSlider.value = 0
+        greenSlider.minimumValue = 0
         greenSlider.maximumValue = 255
         
-        blueSlider.value = 1
-        blueSlider.minimumValue = 1
+        blueSlider.value = 0
+        blueSlider.minimumValue = 0
         blueSlider.maximumValue = 255
         
         redSlider.thumbTintColor = UIColor(red: 194/255, green: 87/255, blue: 174/255, alpha: 1)
