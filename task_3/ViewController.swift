@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol ViewControllerDelegate {
+    func colorGet(_ color: UIColor)
+}
+
 class ViewController: UIViewController {
+    
+    var delegate: ViewControllerDelegate? //waek выдаёт ошибку
+    var colourMainVC: UIColor!
 
     @IBOutlet var mainView: UIView!
     
@@ -23,11 +30,24 @@ class ViewController: UIViewController {
     @IBOutlet var blueCount: UILabel!
     @IBOutlet var blueSlider: UISlider!
     
-
+    @IBOutlet var redTextField: UITextField!
+    @IBOutlet var greenTextField: UITextField!
+    @IBOutlet var blueTextField: UITextField!
+    
+    
+   
+    @IBOutlet var goBackButton: UIButton!
+    
+    @IBAction func goBack(_ sender: Any) {
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        mainView.backgroundColor = colourMainVC
+        
         mainView.layer.cornerRadius = 10
         
         //MARK: Label
@@ -73,31 +93,41 @@ class ViewController: UIViewController {
         blueSlider.minimumTrackTintColor = .blue
         blueSlider.maximumTrackTintColor = .black
         
-        colourMainView()
+        redTextField.text = String(Int(0))
+        greenTextField.text = String(Int(0))
+        blueTextField.text = String(Int(0))
+        
+        colorMain()
     }
 
     @IBAction func redSliderAction(_ sender: UISlider) {
-        colourMainView()
+        colorMain()
         redCount.text = String(Int(redSlider.value))
+        redTextField.text = String(Int(redSlider.value))
     }
     
     @IBAction func greenSliderAction(_ sender: UISlider) {
-        colourMainView()
+        colorMain()
         greenCount.text = String(Int(greenSlider.value))
+        greenTextField.text = String(Int(greenSlider.value))
     }
     
     @IBAction func blueSliderAction(_ sender: UISlider) {
-        colourMainView()
+        colorMain()
         blueCount.text = String(Int(blueSlider.value))
+        blueTextField.text = String(Int(blueSlider.value))
     }
     
-    private func colourMainView() {
-        mainView.backgroundColor = UIColor(
+    func colorMain() {
+
+        let colorCreation = UIColor(
             red: CGFloat(redSlider.value) / 255,
             green: CGFloat(greenSlider.value) / 255,
             blue: CGFloat(blueSlider.value) / 255,
             alpha: 1)
+        
+        mainView.backgroundColor = colorCreation
+        delegate?.colorGet(colorCreation)
     }
-    
 }
 
